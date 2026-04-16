@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import ProductCard from '@/components/ui/ProductCard';
-import { mockProducts } from '@/lib/mocks';
+import { getRecentProducts } from '@/lib/db';
 
-export default function Home() {
-  const bestsellers = mockProducts.slice(0, 4);
+export const runtime = 'edge';
+
+export default async function Home() {
+  const bestsellers = await getRecentProducts(4);
 
   return (
     <>

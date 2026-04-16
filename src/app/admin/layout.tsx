@@ -1,18 +1,27 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Package, ShoppingCart, LogOut } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    setMounted(true);
+    if (typeof window !== 'undefined' && sessionStorage.getItem('golden_admin') === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (username === 'admin' && password === 'admin123') {
+      sessionStorage.setItem('golden_admin', 'true');
       setIsAuthenticated(true);
       setError('');
     } else {
@@ -21,10 +30,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   const handleLogout = () => {
+    sessionStorage.removeItem('golden_admin');
     setIsAuthenticated(false);
     setUsername('');
     setPassword('');
   };
+
+  if (!mounted) return null;
 
   if (!isAuthenticated) {
     return (

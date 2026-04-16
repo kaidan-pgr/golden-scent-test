@@ -1,0 +1,2 @@
+﻿C:\Users\mewas\.gemini\antigravity\scratch\golden-scent\.next\server\app\index.html
+C:\Users\mewas\.gemini\antigravity\scratch\golden-scent\node_modules\next\dist\bundle-analyzer\index.html

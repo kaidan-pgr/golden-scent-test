@@ -1,8 +1,10 @@
 import ProductCard from '@/components/ui/ProductCard';
-import { mockProducts } from '@/lib/mocks';
+import { getAllProducts } from '@/lib/db';
 
-export default function SklepPage() {
-  const products = mockProducts;
+export const runtime = 'edge';
+
+export default async function StorePage() {
+  const products = await getAllProducts();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">

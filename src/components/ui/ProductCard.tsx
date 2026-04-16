@@ -1,6 +1,7 @@
 "use client";
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Product } from '@/types';
 import { useCartStore } from '@/store/cartStore';
 
@@ -14,7 +15,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group relative flex flex-col bg-gray-dark/30 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-transparent gold-border-hover">
       
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-dark">
+      <Link href={`/sklep/${product.id}`} className="relative aspect-[4/5] w-full overflow-hidden bg-gray-dark block">
         <Image
           src={product.imageUrl}
           alt={product.name}
@@ -22,13 +23,13 @@ export default function ProductCard({ product }: ProductCardProps) {
           className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-in-out"
           sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
         />
-      </div>
+      </Link>
 
       <div className="flex flex-col flex-grow p-6">
-        <div className="mb-2">
+        <Link href={`/sklep/${product.id}`} className="block mb-2 hover:opacity-80 transition-opacity">
           <p className="text-xs text-gold uppercase tracking-widest font-semibold">{product.brand}</p>
           <h3 className="mt-1 font-serif text-xl font-medium text-foreground">{product.name}</h3>
-        </div>
+        </Link>
         
         <p className="mt-2 text-sm text-gray-400 line-clamp-2 mb-4">
           {product.description}
